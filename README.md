@@ -10,7 +10,7 @@ This project is licensed under the **Creative Commons Attribution-NonCommercial 
 - **Personal Use**: You can use, modify, and share the software for personal projects, research, or non-commercial purposes.
 - **Attribution**: You must include the original copyright notice, a link to the license, and indicate if changes were made.
 - **No Commercial Use**: You may not use this software for commercial purposes, such as selling it, offering it as part of a commercial service, or using it in a business to generate revenue, without permission from the author.
-- **Contact for Commercial Use**: If you wish to use this software commercially, please contact [Your Contact Information] for licensing arrangements.
+- **Contact for Commercial Use**: If you wish to use this software commercially, please contact @shishir-bondre for licensing arrangements.
 
 ## 🎯 Key Features
 
