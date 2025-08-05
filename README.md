@@ -2,6 +2,16 @@
 
 A modular, efficient MCP (Model Context Protocol) server that provides Git repository context to Claude Desktop with support for multiple repositories, workspaces, and intelligent file tracking.
 
+## 📜 License
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**. You are free to use, copy, modify, and share this software for **personal, non-commercial purposes**, provided you give appropriate credit to the original author. **Commercial use, including selling the software or using it in commercial services, is prohibited** without explicit permission from the author. See the [LICENSE](LICENSE) file or [https://creativecommons.org/licenses/by-nc/4.0/](https://creativecommons.org/licenses/by-nc/4.0/) for full details.
+
+### Usage Terms
+- **Personal Use**: You can use, modify, and share the software for personal projects, research, or non-commercial purposes.
+- **Attribution**: You must include the original copyright notice, a link to the license, and indicate if changes were made.
+- **No Commercial Use**: You may not use this software for commercial purposes, such as selling it, offering it as part of a commercial service, or using it in a business to generate revenue, without permission from the author.
+- **Contact for Commercial Use**: If you wish to use this software commercially, please contact [Your Contact Information] for licensing arrangements.
+
 ## 🎯 Key Features
 
 - **Multi-Repository Support**: Dynamically switch between multiple git repositories
@@ -30,6 +40,7 @@ git-mcp-server/
 ├── setup.sh                  # One-command setup
 ├── test_mcp.sh               # Test script
 ├── requirements.txt          # Python dependencies
+├── LICENSE                    # Creative Commons Attribution-NonCommercial 4.0 License
 └── README.md
 ```
 
@@ -115,14 +126,14 @@ Control how file changes are communicated:
 - `search_files` - Search files by pattern
 - `load_git_context` - Load repository changes (use sparingly)
 
-### Git Operations  
+### Git Operations
 - `get_commit_history` - Get commit history
 - `reset_state` - Reset tracking state
 
 ## 📊 Available Resources
 
 - `git://repositories` - List all discovered repositories
-- `git://current` - Current repository information  
+- `git://current` - Current repository information
 - `git://status` - Git repository status (when repo selected)
 - `git://summary` - Repository summary with file counts
 
@@ -132,9 +143,11 @@ Control how file changes are communicated:
 ```bash
 # Set up workspace for specific feature
 You: Set repository to backend-api
-You: Create workspace "auth-feature" with files: src/auth.py, tests/test_auth.py, requirements.txt
+You: Create workspace "auth
 
-# Work on files... then check updates efficiently  
+-feature" with files: src/auth.py, tests/test_auth.py, requirements.txt
+
+# Work on files... then check updates efficiently
 You: Update workspace "auth-feature" with diffs only
 Claude: [Shows only the changes you made]
 
@@ -146,7 +159,7 @@ Claude: [Shows updated components with intelligent diff/content mix]
 
 ### Code Review Mode
 ```bash
-You: Set repository to my-project  
+You: Set repository to my-project
 You: Load git context with max 30 files and diffs only mode
 Claude: [Shows changed files across repository with diffs]
 
@@ -160,7 +173,7 @@ Claude: [Shows complete content of specific files]
 You: Set repository to api-server
 You: Create workspace "endpoints" with files: [endpoint files]
 
-# Chat 2: Work on frontend  
+# Chat 2: Work on frontend
 You: Set repository to web-app
 You: Create workspace "ui-components" with files: [component files]
 
@@ -185,7 +198,7 @@ coverage/
 ```
 /Users/john/Projects/           # Base directory
 ├── api-server/                 # Git repo 1
-├── web-app/                    # Git repo 2  
+├── web-app/                    # Git repo 2
 ├── mobile-app/                 # Git repo 3
 └── docs-site/                  # Git repo 4
 ```
@@ -196,7 +209,7 @@ coverage/
 # Build
 ./build.sh
 
-# Test  
+# Test
 ./test_mcp.sh /Users/john/Projects
 
 # Setup with Claude Desktop
@@ -211,7 +224,7 @@ coverage/
 - **Smart filtering**: Automatic ignore pattern respect
 - **Persistent state**: Remember what Claude has seen
 
-### For Developer Experience  
+### For Developer Experience
 - **Multi-repo support**: Switch between projects seamlessly
 - **Flexible updates**: Choose how changes are communicated
 - **Focused workspaces**: Create context for specific tasks
