@@ -6,10 +6,10 @@ Handles repository discovery and switching
 import os
 import json
 import logging
-from typing import List, Dict, Optional
-from file_manager import FileManager
+from typing import List, Dict
+from src.core.file_manager import FileManager
 from state_manager import StateManager
-from git_operations import GitOperations
+from src.core.git_operations import GitOperations
 from workspace_manager import WorkspaceManager
 
 logger = logging.getLogger(__name__)

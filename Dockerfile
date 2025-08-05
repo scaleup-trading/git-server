@@ -1,36 +1,33 @@
+# Use a slim Python 3.11 base image for smaller size
 FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
-# Install Git
+# Install Git and dependencies in a single layer to reduce image size
 RUN apt-get update && \
-    apt-get install -y git && \
+    apt-get install -y --no-install-recommends git && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python packages
+# Copy requirements first to leverage Docker cache
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the MCP server script
-COPY git_mcp_server.py .
-COPY git_operations.py .
-COPY file_manager.py .
-COPY repository_manager.py .
-COPY diff_processor.py .
-COPY state_manager.py .
-COPY workspace_manager.py .
-RUN chmod +x *.py
+# Copy source code
+COPY src/ ./src/
+COPY scripts/run_docker_mcp.sh ./scripts/run_docker_mcp.sh
 
 # Create state directory for persistent storage
-RUN mkdir -p /app/state
+RUN mkdir -p /app/state && \
+    chmod -R 755 /app/src/*.py /app/scripts/*.sh
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app
 
-# Mount points
-VOLUME ["/repos"]
-VOLUME ["/app/state"]
+# Mount points for repositories and state
+VOLUME ["/repos", "/app/state"]
 
-# Entry point expects base repos directory as argument
-ENTRYPOINT ["python3", "git_mcp_server.py"]
+ENTRYPOINT ["python3", "src/git_mcp_server.py"]
 CMD ["/repos"]
+```

@@ -4,10 +4,10 @@ Workspace management for Git MCP Server
 Handles workspace creation, loading, and updates
 """
 import logging
-from typing import Dict, List, Optional
-from file_manager import FileManager
+from typing import Dict, List
+from src.core.file_manager import FileManager
 from state_manager import StateManager
-from diff_processor import DiffProcessor
+from src.core.diff_processor import DiffProcessor
 
 logger = logging.getLogger(__name__)
 

@@ -23,25 +23,36 @@ This project is licensed under the **Creative Commons Attribution-NonCommercial 
 
 ## 📁 Modular Architecture
 
-The server is now split into focused modules for better maintainability:
+The server is organized into focused modules for better maintainability:
 
 ```
 git-mcp-server/
-├── git_mcp_server.py          # Main server orchestration
-├── file_manager.py            # File operations and ignore patterns
-├── state_manager.py           # Persistent state management
-├── diff_processor.py          # Content diffing and update modes
-├── workspace_manager.py       # Workspace creation and management
-├── git_operations.py          # Git-specific operations
-├── repository_manager.py      # Multi-repository management
+├── src/                       # Source code
+│   ├── git_mcp_server.py     # Main server orchestration
+│   ├── core/                 # Core functionality
+│   │   ├── file_manager.py   # File operations and ignore patterns
+│   │   ├── state_manager.py  # Persistent state management
+│   │   ├── diff_processor.py # Content diffing and update modes
+│   │   ├── workspace_manager.py # Workspace creation and management
+│   │   ├── git_operations.py # Git-specific operations
+│   │   └── repository_manager.py # Multi-repository management
+├── scripts/                   # Build and run scripts
+│   ├── run_docker_mcp.sh     # Docker wrapper script
+│   ├── build.sh              # Build Docker image
+│   ├── setup.sh              # One-command setup
+│   └── test_mcp.sh           # Test script
+├── config/                    # Configuration files
+│   └── .mcpignore.example    # Example ignore patterns
+├── tests/                     # Unit and integration tests
+│   └── test_core.py          # Core functionality tests
+├── docs/                      # Documentation
+│   ├── installation.md       # Installation guide
+│   ├── usage.md              # Usage examples and update modes
+│   └── api.md                # API/tool reference
 ├── Dockerfile                 # Docker container configuration
-├── run_docker_mcp.sh         # Docker wrapper script
-├── build.sh                  # Build Docker image
-├── setup.sh                  # One-command setup
-├── test_mcp.sh               # Test script
-├── requirements.txt          # Python dependencies
+├── requirements.txt           # Python dependencies
 ├── LICENSE                    # Creative Commons Attribution-NonCommercial 4.0 License
-└── README.md
+└── README.md                 # Project overview
 ```
 
 ### Module Responsibilities
@@ -54,136 +65,18 @@ git-mcp-server/
 - **`git_operations.py`**: Git status, commit history, branch info
 - **`repository_manager.py`**: Multi-repo discovery and switching
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-### 1. Setup
-```bash
-# Clone/download this project
-mkdir git-mcp-server && cd git-mcp-server
+See [docs/installation.md](docs/installation.md) for detailed setup instructions, including cloning the repository, installing dependencies, and running with Docker.
 
-# Copy all the module files above
+## 🎛️ Usage and Tools
 
-# Run setup with your projects directory
-./setup.sh /Users/john/Projects
-
-# Restart Claude Desktop
-```
-
-### 2. Basic Usage
-```
-You: What git repositories are available?
-Claude: [Shows all discovered repositories]
-
-You: Set repository to my-website
-Claude: ✅ Switched to my-website
-
-You: Create workspace "frontend" with files: src/App.js, src/Header.js, package.json
-Claude: ✅ Created workspace with full content of 3 files
-
-You: Update workspace "frontend" with diffs only
-Claude: [Shows only changes since last time]
-```
-
-## 🎛️ Update Modes
-
-Control how file changes are communicated:
-
-### `smart` (Default)
-- **New files**: Full content
-- **Modified files**: Unified diffs
-- **Unchanged files**: Status only
-- **Best balance** of context and efficiency
-
-### `diffs_only` (Most Efficient)
-- **All changes**: Unified diffs only
-- **New files**: Truncated content
-- **Minimal token usage**
-
-### `full_content` (Complete Context)
-- **All files**: Complete content
-- **Highest token usage**
-- **Full context for Claude**
-
-### `changed_files_only` (Changed Only)
-- **Only changed files**: Full content
-- **Skip unchanged files entirely**
-- **Balanced approach**
-
-## 🛠️ Available Tools
-
-### Repository Management
-- `set_repository` - Switch to a different repository
-- `list_repositories` - List all available repositories
-
-### Workspace Management
-- `create_workspace` - Create curated file sets
-- `load_workspace` - Load workspace with update mode
-- `update_workspace` - Check for workspace updates
-- `list_workspaces` - List all workspaces
-
-### File Operations
-- `get_files` - Get specific files with update control
-- `search_files` - Search files by pattern
-- `load_git_context` - Load repository changes (use sparingly)
-
-### Git Operations
-- `get_commit_history` - Get commit history
-- `reset_state` - Reset tracking state
-
-## 📊 Available Resources
-
-- `git://repositories` - List all discovered repositories
-- `git://current` - Current repository information
-- `git://status` - Git repository status (when repo selected)
-- `git://summary` - Repository summary with file counts
-
-## 💡 Usage Examples
-
-### Focused Development Workflow
-```bash
-# Set up workspace for specific feature
-You: Set repository to backend-api
-You: Create workspace "auth
-
--feature" with files: src/auth.py, tests/test_auth.py, requirements.txt
-
-# Work on files... then check updates efficiently
-You: Update workspace "auth-feature" with diffs only
-Claude: [Shows only the changes you made]
-
-# Switch context
-You: Set repository to frontend
-You: Load workspace "components" with smart mode
-Claude: [Shows updated components with intelligent diff/content mix]
-```
-
-### Code Review Mode
-```bash
-You: Set repository to my-project
-You: Load git context with max 30 files and diffs only mode
-Claude: [Shows changed files across repository with diffs]
-
-You: Get files src/main.py, docs/README.md with full content
-Claude: [Shows complete content of specific files]
-```
-
-### Multi-Repository Work
-```bash
-# Chat 1: Work on backend
-You: Set repository to api-server
-You: Create workspace "endpoints" with files: [endpoint files]
-
-# Chat 2: Work on frontend
-You: Set repository to web-app
-You: Create workspace "ui-components" with files: [component files]
-
-# Each maintains separate state and context
-```
+Refer to [docs/usage.md](docs/usage.md) for usage examples, workflows, and update modes, and [docs/api.md](docs/api.md) for a complete list of available tools and resources.
 
 ## 🔧 Configuration
 
 ### Custom Ignore Patterns
-Create `.mcpignore` in your repository root:
+Create a `.mcpignore` file in your repository root to define custom ignore patterns. Use [config/.mcpignore.example](config/.mcpignore.example) as a template:
 ```
 # Custom MCP ignores
 build/
@@ -205,16 +98,7 @@ coverage/
 
 ## 🏗️ Build & Deploy
 
-```bash
-# Build
-./build.sh
-
-# Test
-./test_mcp.sh /Users/john/Projects
-
-# Setup with Claude Desktop
-./setup.sh /Users/john/Projects
-```
+See [docs/installation.md](docs/installation.md) for instructions on building the Docker image and deploying the server.
 
 ## 🎯 Benefits
 

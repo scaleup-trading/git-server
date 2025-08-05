@@ -1,0 +1,21 @@
+# Example .mcpignore file for Multi-Repository Git MCP Server
+# Use this to define custom ignore patterns for file tracking
+# Patterns follow .gitignore syntax
+
+# Build artifacts
+build/
+dist/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Generated documentation
+docs/generated/
+
+# Test coverage reports
+coverage/
+
+# Python cache
+__pycache__/
+*.pyc

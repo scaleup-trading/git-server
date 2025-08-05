@@ -14,8 +14,8 @@ from typing import List
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.types import Resource, Tool, TextContent
-from diff_processor import DiffProcessor
-from repository_manager import RepositoryManager
+from src.core.diff_processor import DiffProcessor
+from src.core.repository_manager import RepositoryManager
 
 # Setup logging
 logging.basicConfig(
